@@ -13,6 +13,7 @@ categoriesRoutes.post("/", (request, response) => {
 });
 
 categoriesRoutes.get("/", (request, response) => {
+  console.log("3");
   return listCategoriesController.handle(request, response);
 });
 
