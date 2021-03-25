@@ -2,6 +2,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../../errors/AppError";
 import { IUserRepository } from "../../repositories/interfaces/IUsersRepository";
 
 interface IRequest {
@@ -32,7 +33,7 @@ class AuthenticateUserUseCase {
       console.log("password :>> ", password);
 
       if (!user) {
-        throw new Error("Email or Passworld incorrect!");
+        throw new AppError("Email or Passworld incorrect!", 401);
       }
 
       const passwordMatch = await compare(password, user.password);
@@ -40,7 +41,7 @@ class AuthenticateUserUseCase {
       console.log("passwordMatch :>> ", passwordMatch);
 
       if (!passwordMatch) {
-        throw new Error("Email or Passworld incorrect!");
+        throw new AppError("Email or Passworld incorrect!", 401);
       }
 
       const token = sign({}, "a7e071b3de48cec1dd24de6cbe6c7bf1", {
