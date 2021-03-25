@@ -46,7 +46,7 @@ class AuthenticateUserUseCase {
 
       const token = sign({}, "a7e071b3de48cec1dd24de6cbe6c7bf1", {
         subject: user.id,
-        expiresIn: "1d",
+        expiresIn: "30d",
       });
 
       console.log("token :>> ", token);
